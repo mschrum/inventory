@@ -1,5 +1,7 @@
 package org.launchcode.inventory.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -82,6 +84,13 @@ public class AuthenticationController extends AbstractController {
         User newUser = new User(username, password, firstName, lastName, role);
         userDao.save(newUser);
 
-        return "createUser";
+        return "redirect:/userManagement";
     }
+    
+    @RequestMapping(value = "/userManagement", method = RequestMethod.GET)
+	public String viewUserTable(Model model) {
+    	List<User> user = userDao.findAll();
+    	model.addAttribute("user", user);
+		return "userManagement";
+	}
 }

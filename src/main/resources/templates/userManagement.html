@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+
+<head th:replace="template :: head">
+</head>
+<body>
+<div class="container">
+
+    <div id="top" th:include="template :: masthead"></div>
+
+    <div id="middle">
+
+        <h1>Coffee Inventory</h1>
+        
+        <form method="get" action="/createUser">
+            <fieldset>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default">New User</button>
+                </div>
+            </fieldset>
+        </form>
+                
+		<div th:object="${user}">
+        <table class="table">
+        <tr><th style="padding-right: 2em">First Name</th>
+        	<th style="padding-right: 2em">Last Name</th>
+        	<th style="padding-right: 2em">Username</th>
+        	<th style="padding-right: 2em">Role</th>
+        </tr>
+        <tr th:each="User:${user}">
+        	<td style="padding-right: 2em" th:text="${User.firstName}"></td>
+        	<td style="padding-right: 2em" th:text="${User.lastName}"></td>
+        	<td style="padding-right: 2em" th:text="${User.username}"></td>
+        	<td style="padding-right: 2em" th:text="${User.role}"></td>
+		</tr>
+	</table>
+	</div>
+    </div>
+
+    <div th:replace="template :: footer"></div>
+</div>
+</body>
+</html>
