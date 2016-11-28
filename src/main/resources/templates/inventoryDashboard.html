@@ -10,8 +10,29 @@
 
     <div id="middle">
 
-        <p>Inventory!</p>
-
+        <h1>Coffee Inventory</h1>
+        
+		<div th:object="${coffeeStock}">
+        <table class="table">
+        <tr><th style="padding-right: 2em">Name</th>
+        	<th style="padding-right: 2em">Pounds Owned</th>
+        	<th style="padding-right: 2em">Price</th>
+        	<th style="padding-right: 2em">Roast</th>
+        	<th style="padding-right: 2em">Body</th>
+        	<th style="padding-right: 2em">Acidity</th>
+        	<th style="padding-right: 2em">Description</th>
+        </tr>
+        <tr th:each="CoffeeStock:${coffeeStock}">
+        	<td style="padding-right: 2em" th:text="${CoffeeStock.name}"></td>
+        	<td style="padding-right: 2em" th:text="${CoffeeStock.poundsOwned}"></td>
+        	<td style="padding-right: 2em" th:text="${CoffeeStock.price}"></td>
+        	<td style="padding-right: 2em" th:text="${CoffeeStock.roast}"></td>
+        	<td style="padding-right: 2em" th:text="${CoffeeStock.body}"></td>
+        	<td style="padding-right: 2em" th:text="${CoffeeStock.acidity}"></td>
+        	<td style="padding-right: 2em" th:text="${CoffeeStock.description}"></td>
+		</tr>
+	</table>
+	</div>
     </div>
 
     <div th:replace="template :: footer"></div>

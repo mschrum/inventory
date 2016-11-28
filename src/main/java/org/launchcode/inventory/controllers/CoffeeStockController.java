@@ -93,4 +93,11 @@ public class CoffeeStockController extends AbstractController{
             coffeeStockDao.save(existingCoffeeStock);
     	return "redirect:customerOrder";
     }
+    
+    @RequestMapping(value = "/inventoryDashboard", method = RequestMethod.GET)
+    public String displayCoffeeStock(Model model) {
+    	List<CoffeeStock> coffeeStock = coffeeStockDao.findAll();
+    	model.addAttribute("coffeeStock", coffeeStock);
+        return "inventoryDashboard";
+    }
 }

@@ -19,12 +19,7 @@ public class AuthenticationController extends AbstractController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String rootHandler() {
-		return "redirect:/index";
-	}
-	
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
-	public String indexHandler() {
-		return "index";
+		return "redirect:/inventoryDashboard";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -51,7 +46,7 @@ public class AuthenticationController extends AbstractController {
 		//log them in, if so use setUserInSession(HttpSession session, User user)
 		HttpSession thisSession=request.getSession();
 		setUserInSession(thisSession, user);
-		return "index";
+		return "redirect:/inventoryDashboard";
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
