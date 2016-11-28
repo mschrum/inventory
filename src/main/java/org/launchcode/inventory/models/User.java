@@ -16,11 +16,14 @@ public class User extends AbstractEntity {
 
 	private String username;
 	private String pwHash;
+	private String firstName;
+	private String lastName;
+	private String role;
 	private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	
 	public User() {}
 	
-	public User(String username, String password) {
+	public User(String username, String password, String firstName, String lastName, String role) {
 		
 		super();
 		
@@ -30,6 +33,9 @@ public class User extends AbstractEntity {
 		
 		this.username = username;
 		this.pwHash = hashPassword(password);
+		this.firstName=firstName;
+		this.lastName=lastName;
+		this.role=role;
 		
 	}
 	
@@ -50,6 +56,39 @@ public class User extends AbstractEntity {
 		return username;
 	}
 	
+	@NotNull
+	@Column(name = "firstName")
+	public String getFirstName(){
+		return firstName;
+	}
+	
+	@SuppressWarnings("unused")
+	private void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	
+	@NotNull
+	@Column(name = "lastName")
+	public String getLastName(){
+		return lastName;
+	}
+	
+	@SuppressWarnings("unused")
+	private void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+	@NotNull
+	@Column(name = "user_role")
+	public String getRole(){
+		return role;
+	}
+	
+	@SuppressWarnings("unused")
+	private void setRole(String role) {
+		this.role = role;
+	}
+
 	private static String hashPassword(String password) {		
 		return encoder.encode(password);
 	}
