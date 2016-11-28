@@ -124,16 +124,16 @@ public class CoffeeStock extends AbstractEntity{
 //        CoffeeTransaction transaction = new CoffeeTransaction(this, numberOfPounds, CoffeeTransaction.TransactionType.BUY);
 //        this.transactions.add(transaction);
     }
-//
-//    public void sellPounds(float numberOfPounds) {
-//
-//        if (numberOfPounds > poundsOwned) {
-//            throw new IllegalArgumentException("Number to sell exceeds pounds of coffee in stock");
-//        }
-//
-//        setPoundsOwned(poundsOwned - numberOfPounds);
-//
+
+    public void sellPounds(float numberOfPounds) {
+
+        if (numberOfPounds > poundsOwned) {
+            throw new IllegalArgumentException("Number to sell exceeds pounds of coffee in stock");
+        }
+
+        setPoundsOwned(poundsOwned - numberOfPounds);
+
 //        CoffeeTransaction transaction = new CoffeeTransaction(this, numberOfPounds, CoffeeTransaction.TransactionType.SELL);
 //        this.transactions.add(transaction);
-//    }
+        }
 }
