@@ -113,16 +113,18 @@ public class AuthenticationController extends AbstractController {
 		return "updateUser";
 	}
 	
-//	@RequestMapping(value = "/updateUser/{uid}", method = RequestMethod.POST)
-//	public String update(HttpServletRequest request, Model model) {
-//		String username=request.getParameter("username");
-//		String firstName=request.getParameter("firstName");
-//		String lastName=request.getParameter("lastName");
-//		String role=request.getParameter("roleType");
-//		
-//		User updatedUser = new User(username, User.password, firstName, lastName, RoleType.valueOf(role));
-//        userDao.save(newUser);
-//
-//		return "redirect:/userManagement";
-//	}
+	@RequestMapping(value = "/updateUser/{uid}", method = RequestMethod.POST)
+	public String update(HttpServletRequest request, Model model) {
+		String uid= request.getParameter("uid");
+		int numUid = Integer.parseInt(uid);
+		User user= userDao.findByUid(numUid);
+		user.setUserName(request.getParameter("username"));
+		user.setFirstName(request.getParameter("firstName"));
+		user.setLastName(request.getParameter("lastName"));
+		String role=request.getParameter("roleType");
+		user.setRole(RoleType.valueOf(role));
+        userDao.save(user);
+
+		return "redirect:/userManagement";
+	}
 }

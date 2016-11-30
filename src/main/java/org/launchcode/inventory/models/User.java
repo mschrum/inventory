@@ -67,14 +67,17 @@ public class User extends AbstractEntity {
 		return username;
 	}
 	
+	public void setUserName(String username){
+		this.username=username;
+	}
+	
 	@NotNull
 	@Column(name = "firstName")
 	public String getFirstName(){
 		return firstName;
 	}
 	
-	@SuppressWarnings("unused")
-	private void setFirstName(String firstName) {
+	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 	
@@ -84,8 +87,7 @@ public class User extends AbstractEntity {
 		return lastName;
 	}
 	
-	@SuppressWarnings("unused")
-	private void setLastName(String lastName) {
+	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 	
@@ -95,8 +97,8 @@ public class User extends AbstractEntity {
 		return type;
 	}
 	
-	@SuppressWarnings("unused")
-	private void setRole(RoleType type) {
+	
+	public void setRole(RoleType type) {
 		this.type = type;
 	}
 
