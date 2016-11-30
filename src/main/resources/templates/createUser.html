@@ -28,8 +28,11 @@
                     <input class="form-control" name="confirmPassword" placeholder="Confirm Password" type="password"/>
                 </div>
                 <div class="form-group">
-                    <input autofocus="true" class="form-control" name="role" placeholder="Role" type="text"/>
-                </div>
+                	<select autofocus="true" class="form-control" name="roleType" id="roleType">
+                		<option value="">Select Role</option>
+   						<option th:each="RoleType : ${T(org.launchcode.inventory.models.User.RoleType).values()}" th:value="${RoleType}" th:text="${RoleType}"></option>
+					</select>
+				</div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-default">Create</button>
                 </div>

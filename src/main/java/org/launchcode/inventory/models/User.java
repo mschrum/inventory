@@ -13,17 +13,28 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Entity
 @Table(name = "users")
 public class User extends AbstractEntity {
+	
+	public enum RoleType {
+		Admin("admin"), Manager("manager"), Employee("employee");
+		@SuppressWarnings("unused")
+		private String type;
+	
+	  RoleType(String type){
+	      this.type = type;
+	  }
+	}
+	
 
 	private String username;
 	private String pwHash;
 	private String firstName;
 	private String lastName;
-	private String role;
+	private RoleType type;
 	private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	
 	public User() {}
 	
-	public User(String username, String password, String firstName, String lastName, String role) {
+	public User(String username, String password, String firstName, String lastName, RoleType type) {
 		
 		super();
 		
@@ -35,7 +46,7 @@ public class User extends AbstractEntity {
 		this.pwHash = hashPassword(password);
 		this.firstName=firstName;
 		this.lastName=lastName;
-		this.role=role;
+		this.type=type;
 		
 	}
 	
@@ -80,13 +91,13 @@ public class User extends AbstractEntity {
 	
 	@NotNull
 	@Column(name = "user_role")
-	public String getRole(){
-		return role;
+	public RoleType getRole(){
+		return type;
 	}
 	
 	@SuppressWarnings("unused")
-	private void setRole(String role) {
-		this.role = role;
+	private void setRole(RoleType type) {
+		this.type = type;
 	}
 
 	private static String hashPassword(String password) {		

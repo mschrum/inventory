@@ -21,7 +21,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
 
-        List<String> authPages = Arrays.asList("/login", "/logout");
+        List<String> authPages = Arrays.asList("/login", "/logout", "/createUser");
 
         // Require sign-in for all but auth pages
         if ( !authPages.contains(request.getRequestURI()) ) {

@@ -6,10 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.launchcode.inventory.models.User;
+import org.launchcode.inventory.models.User.RoleType;
 import org.launchcode.inventory.models.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -58,7 +60,8 @@ public class AuthenticationController extends AbstractController {
 	}
 	
 	@RequestMapping(value = "/createUser", method = RequestMethod.GET)
-	public String newUserForm() {
+	public String newUserForm(Model model) {
+		model.addAttribute("roleType", RoleType.values());
 		return "createUser";
 	}
 	
@@ -69,7 +72,8 @@ public class AuthenticationController extends AbstractController {
 		String confirmPassword=request.getParameter("confirmPassword");
 		String firstName=request.getParameter("firstName");
 		String lastName=request.getParameter("lastName");
-		String role=request.getParameter("role");
+		String role=request.getParameter("roleType");
+		//RoleType roletype = RoleType(role);
         // Perform some validation
         User existingUser = userDao.findByUsername(username);
         if (existingUser != null) {
@@ -81,7 +85,7 @@ public class AuthenticationController extends AbstractController {
         }
 
         // Validation passed. Create and persist a new User entity
-        User newUser = new User(username, password, firstName, lastName, role);
+        User newUser = new User(username, password, firstName, lastName, RoleType.valueOf(role));
         userDao.save(newUser);
 
         return "redirect:/userManagement";
@@ -93,4 +97,32 @@ public class AuthenticationController extends AbstractController {
     	model.addAttribute("user", user);
 		return "userManagement";
 	}
+    
+	@RequestMapping(value = "/delete/{uid}", method = RequestMethod.GET)
+	public String deleteUser(@PathVariable int uid, Model model) {
+		
+		//get the given post
+		userDao.delete(uid);
+		return "redirect:/userManagement";
+	}
+	
+	@RequestMapping(value = "/updateUser/{uid}", method = RequestMethod.GET)
+	public String updateUser(@PathVariable int uid, Model model) {
+		User user= userDao.findByUid(uid);
+		model.addAttribute("user", user);
+		return "updateUser";
+	}
+	
+//	@RequestMapping(value = "/updateUser/{uid}", method = RequestMethod.POST)
+//	public String update(HttpServletRequest request, Model model) {
+//		String username=request.getParameter("username");
+//		String firstName=request.getParameter("firstName");
+//		String lastName=request.getParameter("lastName");
+//		String role=request.getParameter("roleType");
+//		
+//		User updatedUser = new User(username, User.password, firstName, lastName, RoleType.valueOf(role));
+//        userDao.save(newUser);
+//
+//		return "redirect:/userManagement";
+//	}
 }

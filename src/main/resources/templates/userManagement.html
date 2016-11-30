@@ -26,12 +26,24 @@
         	<th style="padding-right: 2em">Last Name</th>
         	<th style="padding-right: 2em">Username</th>
         	<th style="padding-right: 2em">Role</th>
+        	<th></th>
+        	<th></th>
         </tr>
         <tr th:each="User:${user}">
         	<td style="padding-right: 2em" th:text="${User.firstName}"></td>
         	<td style="padding-right: 2em" th:text="${User.lastName}"></td>
         	<td style="padding-right: 2em" th:text="${User.username}"></td>
         	<td style="padding-right: 2em" th:text="${User.role}"></td>
+        	<td>
+        	<a th:href="'/updateUser/' + ${User.uid}">
+        		<button type="button" class="btn-sm btn-warning">Update</button>
+        	</a>
+        	</td>
+        	<td>
+        	<a th:href="'/delete/' + ${User.uid}">
+        		<button type="button" class="btn-sm btn-danger">Delete</button>
+        	</a>
+        	</td>
 		</tr>
 	</table>
 	</div>
